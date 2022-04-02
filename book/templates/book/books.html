@@ -1,0 +1,21 @@
+{% extends 'book/base.html' %}
+
+{% block content %}
+
+{% if book_id %}
+<h2>Book by id {{ book_id }}:</h2>
+<p>{{books_id.name}}</p>
+
+{% else %}
+
+<b>all books in library:</b>
+<ul>
+    {% for book in all_books%}
+    <li>{{book.name}}</li>
+    {% endfor %}
+</ul>
+
+{% endif %}
+
+
+{% endblock %}
