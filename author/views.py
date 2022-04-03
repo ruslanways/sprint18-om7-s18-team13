@@ -5,7 +5,7 @@ from . models import *
 
 def authors(request, author_id=None):
     param_with_author_id = {
-        'title': 'Books for specific author',
+        'title': 'Books by specific author',
         'author_id': author_id,
         'authors_id': Book.objects.filter(authors__pk=author_id)
     }

@@ -2,12 +2,25 @@
 
 {% block content %}
 
-<h2>Book books given by specific user {{ user_id }}:</h2>
+{% if user_id %}
+
+<h2>Book books given by specific user (id) {{ user_id }}:</h2>
 
 <ul>
     {% for book in users_id %}
-    <li>{{book}}</li>
+    <li>{{book.book.name}}</li>
     {% endfor %}
 </ul>
+
+{% else %}
+
+<b>All users:</b>
+<ul>
+    {% for user in all_users%}
+    <li>{{ user.last_name }} {{ user.first_name }} {{ user.moddle_name }}</li>
+    {% endfor %}
+</ul>
+
+{% endif %}
 
 {% endblock %}
