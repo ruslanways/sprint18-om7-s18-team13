@@ -18,7 +18,7 @@
 {% else %}
 
 <div style="display: inline-block; width: 200px;">
-    <b>All books in library:</b>
+    <b>All books in library ({{all_books | length}}):</b>
     <ul style="font-size:small">
         {% for book in all_books %}
         <li>{{book.name}}</li>

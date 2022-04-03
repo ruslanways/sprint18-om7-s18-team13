@@ -14,7 +14,7 @@
 
 {% else %}
 
-<b>All users ({{all_users|length}} persons):</b>
+<b>All users ({{all_users|length}}):</b>
 <ul style="font-size:small">
     {% for user in all_users %}
     <li>{{ user.last_name }} {{ user.first_name }} {{ user.moddle_name }}</li>

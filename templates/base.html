@@ -12,7 +12,7 @@
     {% block mainmenu %}
     <header>
         <div style="background-color: rgb(239, 192, 22);">
-        <h3>"Library" web-project</h3>
+        <h3><a href="{% url 'main' %}">"Library" web-project</a></h3>
         <p>om7-s16-team12</p>
         <p>Ruslan Mansurov, Maksym Fil</p>
         </div>
@@ -20,7 +20,7 @@
         <br>
     </header>
     {% endblock mainmenu %}
-    <main>
+    <main style="background-color: rgb(233, 232, 222);">
         {% block content %}
         {% endblock %}
     </main>
