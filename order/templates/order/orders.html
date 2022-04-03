@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<b>All orders sorted by date (created at, plated at):</b>
+<ul>
+    {% for order in all_orders%}
+    <li>{{ order }}</li>
+    {% endfor %}
+</ul>
+
+{% endblock %}

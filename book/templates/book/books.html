@@ -1,4 +1,4 @@
-{% extends 'book/base.html' %}
+{% extends 'base.html' %}
 
 {% block content %}
 
@@ -8,9 +8,27 @@
 
 {% else %}
 
-<b>all books in library:</b>
+<b>All books in library:</b>
 <ul>
     {% for book in all_books%}
+    <li>{{book.name}}</li>
+    {% endfor %}
+</ul>
+
+<br>
+
+<b>Sorted by name asc, count:</b>
+<ul>
+    {% for book in all_books_sorted_asc%}
+    <li>{{book.name}}</li>
+    {% endfor %}
+</ul>
+
+<br>
+
+<b>Sorted by name desc, count:</b>
+<ul>
+    {% for book in all_books_sorted_desc%}
     <li>{{book.name}}</li>
     {% endfor %}
 </ul>

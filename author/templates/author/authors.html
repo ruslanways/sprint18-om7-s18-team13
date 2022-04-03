@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+{% if author_id %}
+
+<h2>Books by author {{ author_id }}:</h2>
+<ul>
+    {% for book in authors_id%}
+    <li>{{book.name}}</li>
+    {% endfor %}
+</ul>
+
+{% else %}
+
+<b>All author:</b>
+<ul>
+    {% for author in all_authors%}
+    <li>{{ author }}</li>
+    {% endfor %}
+</ul>
+
+{% endif %}
+
+
+{% endblock %}
