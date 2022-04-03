@@ -1,17 +1,27 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{title}}</title>
 </head>
+
 <body>
     {% block mainmenu %}
+    <header>
+        <h3>"Library" web-project</h3>
+        <p>om7-s16-team12</p>
+        <p>Ruslan Mansurov, Maksym Fil</p>
+        <hr>
+        <br>
+    </header>
     {% endblock mainmenu %}
-
-    {% block content %}
-    {% endblock %}
-    
+    <main>
+        {% block content %}
+        {% endblock %}
+    </main>
 </body>
+
 </html>

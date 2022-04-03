@@ -1,7 +1,6 @@
-# from typing import List
 from django.shortcuts import render
 from . models import *
-from django.db.models import F
+# from django.db.models import F
 
 def orders(request):
     all_orders = list(Order.objects.all().order_by('created_at','plated_end_at'))

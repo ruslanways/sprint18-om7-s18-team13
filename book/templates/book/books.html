@@ -3,13 +3,13 @@
 {% block content %}
 
 {% if book_id %}
-<h2>Book by id {{ book_id }}:</h2>
-<p>{{books_id.name}}</p>
+<b>Book by id {{ book_id }}:</b>
+    {{books_id.name}}
 
 {% elif book_name %}
 
 <b>Books by name:</b>
-<ul>
+<ul style="font-size:small">
     {% for book in books_by_name %}
     <li>{{book}}</li>
     {% endfor %}
@@ -17,31 +17,33 @@
 
 {% else %}
 
-<b>All books in library:</b>
-<ul>
-    {% for book in all_books %}
-    <li>{{book.name}}</li>
-    {% endfor %}
-</ul>
+<div style="display: inline-block; width: 200px;">
+    <b>All books in library:</b>
+    <ul style="font-size:small">
+        {% for book in all_books %}
+        <li>{{book.name}}</li>
+        {% endfor %}
+    </ul>
 
-<br>
+</div>
+<div style="display: inline-block; width: 200px;">
+    <b>Sorted by name asc, count:</b>
+    <ul style="font-size:small">
+        {% for book in all_books_sorted_asc %}
+        <li>{{book.name}}</li>
+        {% endfor %}
+    </ul>
 
-<b>Sorted by name asc, count:</b>
-<ul>
-    {% for book in all_books_sorted_asc %}
-    <li>{{book.name}}</li>
-    {% endfor %}
-</ul>
+</div>
 
-<br>
-
-<b>Sorted by name desc, count:</b>
-<ul>
-    {% for book in all_books_sorted_desc %}
-    <li>{{book.name}}</li>
-    {% endfor %}
-</ul>
-
+<div style="display: inline-block; width: 200px;">
+    <b>Sorted by name desc, count:</b>
+    <ul style="font-size:small">
+        {% for book in all_books_sorted_desc %}
+        <li>{{book.name}}</li>
+        {% endfor %}
+    </ul>
+</div>
 {% endif %}
 
 

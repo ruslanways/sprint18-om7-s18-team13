@@ -4,9 +4,9 @@
 
 {% if user_id %}
 
-<h2>Book books given by specific user (id) {{ user_id }}:</h2>
+<b>Books given by specific user id({{ user_id }}):</b>
 
-<ul>
+<ul style="font-size:small">
     {% for book in users_id %}
     <li>{{book.book.name}}</li>
     {% endfor %}
@@ -14,9 +14,9 @@
 
 {% else %}
 
-<b>All users:</b>
-<ul>
-    {% for user in all_users%}
+<b>All users ({{all_users|length}} persons):</b>
+<ul style="font-size:small">
+    {% for user in all_users %}
     <li>{{ user.last_name }} {{ user.first_name }} {{ user.moddle_name }}</li>
     {% endfor %}
 </ul>

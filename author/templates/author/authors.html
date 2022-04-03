@@ -4,8 +4,8 @@
 
 {% if author_id %}
 
-<h2>Books by author {{ author_id }}:</h2>
-<ul>
+<b>Books by author {{ author_id }}:</b>
+<ul style="font-size:small">
     {% for book in authors_id%}
     <li>{{book.name}}</li>
     {% endfor %}
@@ -13,9 +13,9 @@
 
 {% else %}
 
-<b>All author:</b>
-<ul>
-    {% for author in all_authors%}
+<b>All authors ({{all_authors | length}}):</b>
+<ul style="font-size:small">
+    {% for author in all_authors %}
     <li>{{ author.surname }} {{ author.name }}</li>
     {% endfor %}
 </ul>
