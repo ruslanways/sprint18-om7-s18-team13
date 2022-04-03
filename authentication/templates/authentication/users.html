@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+{% if user_id %}
+
+<b>Books given by specific user id({{ user_id }}):</b>
+
+<ul style="font-size:small">
+    {% for book in users_id %}
+    <li>{{book.book.name}}</li>
+    {% endfor %}
+</ul>
+
+{% else %}
+
+<b>All users ({{all_users|length}}):</b>
+<ul style="font-size:small">
+    {% for user in all_users %}
+    <li>{{ user.last_name }} {{ user.first_name }} {{ user.moddle_name }}</li>
+    {% endfor %}
+</ul>
+
+{% endif %}
+
+{% endblock %}

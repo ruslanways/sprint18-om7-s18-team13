@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<b>Persons who does not hand over books on time:</b>
+<ul style="font-size:small">
+    {% for breaker in breakers%}
+    <li>{{ breaker }}</li>
+    {% endfor %}
+</ul>
+
+{% endblock %}

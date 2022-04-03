@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+{% if author_id %}
+
+<b>Books by author {{ author_id }}:</b>
+<ul style="font-size:small">
+    {% for book in authors_id%}
+    <li>{{book.name}}</li>
+    {% endfor %}
+</ul>
+
+{% else %}
+
+<b>All authors ({{all_authors | length}}):</b>
+<ul style="font-size:small">
+    {% for author in all_authors %}
+    <li>{{ author.surname }} {{ author.name }}</li>
+    {% endfor %}
+</ul>
+
+{% endif %}
+
+
+{% endblock %}

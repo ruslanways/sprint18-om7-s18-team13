@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+{% if book_id %}
+<b>Book by id {{ book_id }}:</b>
+    {{books_id.name}}
+
+{% elif book_name %}
+
+<b>Books by name:</b>
+<ul style="font-size:small">
+    {% for book in books_by_name %}
+    <li>{{book}}</li>
+    {% endfor %}
+</ul>
+
+{% else %}
+
+<div style="display: inline-block; width: 200px;">
+    <b>All books in library ({{all_books | length}}):</b>
+    <ul style="font-size:small">
+        {% for book in all_books %}
+        <li>{{book.name}}</li>
+        {% endfor %}
+    </ul>
+
+</div>
+<div style="display: inline-block; width: 200px;">
+    <b>Sorted by name asc, count:</b>
+    <ul style="font-size:small">
+        {% for book in all_books_sorted_asc %}
+        <li>{{book.name}}</li>
+        {% endfor %}
+    </ul>
+
+</div>
+
+<div style="display: inline-block; width: 200px;">
+    <b>Sorted by name desc, count:</b>
+    <ul style="font-size:small">
+        {% for book in all_books_sorted_desc %}
+        <li>{{book.name}}</li>
+        {% endfor %}
+    </ul>
+</div>
+{% endif %}
+
+
+{% endblock %}
