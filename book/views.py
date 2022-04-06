@@ -1,7 +1,18 @@
 from django.shortcuts import render
+from book.forms import *
 from . models import *
 
 def books(request, book_id=None, book_name=None):
+
+    if request.method == 'POST':
+        form = AddBook(request.POST)
+        if form.is_valid():
+            print(form.cleaned_data)
+            
+        else:
+            form = AddBook()
+    else:
+        form = AddBook()
 
     param_with_book_id = {
         'title': 'Books by id',
@@ -10,6 +21,7 @@ def books(request, book_id=None, book_name=None):
     }
 
     param = {
+        'form': form,
         'title': 'Books',
         'all_books': Book.objects.all(),
         'all_books_sorted_asc': Book.objects.all().order_by('name', 'count'),

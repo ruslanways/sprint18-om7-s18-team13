@@ -4,7 +4,7 @@
 
 {% if book_id %}
 <b>Book by id {{ book_id }}:</b>
-    {{books_id.name}}
+{{books_id.name}}
 
 {% elif book_name %}
 
@@ -17,6 +17,14 @@
 
 {% else %}
 
+<b>Add new books:</b>
+<form action="{% url 'books' %}" method="POST">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <!-- <button type="submit">Submit</button> -->
+    <input type="submit">
+</form>
+<br>
 <div style="display: inline-block; width: 200px;">
     <b>All books in library ({{all_books | length}}):</b>
     <ul style="font-size:small">
