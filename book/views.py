@@ -1,18 +1,22 @@
-from django.shortcuts import render
+from django.shortcuts import redirect, render
 from book.forms import *
 from . models import *
 
 def books(request, book_id=None, book_name=None):
 
     if request.method == 'POST':
-        form = AddBook(request.POST)
+        if book_id:
+            if 'delete' in request.POST:
+                Book.objects.get(id=book_id).delete()
+                return redirect('books')
+            form = AddBook(request.POST, instance=Book.objects.get(id=book_id))
+        else:
+            form = AddBook(request.POST)
         if form.is_valid():
-            print(form.cleaned_data)
-            
+            form.save()
+            return redirect('books')
         else:
             form = AddBook()
-    else:
-        form = AddBook()
 
     param_with_book_id = {
         'title': 'Books by id',
@@ -21,7 +25,7 @@ def books(request, book_id=None, book_name=None):
     }
 
     param = {
-        'form': form,
+        'form': AddBook(),
         'title': 'Books',
         'all_books': Book.objects.all(),
         'all_books_sorted_asc': Book.objects.all().order_by('name', 'count'),
@@ -36,5 +40,6 @@ def books(request, book_id=None, book_name=None):
          }
         return render(request, 'book/books.html', param_with_book_name)
     if book_id:
+        param_with_book_id.update({'form': AddBook(instance=Book.objects.get(id=book_id))})
         return render(request, 'book/books.html', param_with_book_id)
     return render(request, 'book/books.html', param)

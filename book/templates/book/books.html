@@ -3,8 +3,24 @@
 {% block content %}
 
 {% if book_id %}
+
 <b>Book by id {{ book_id }}:</b>
 {{books_id.name}}
+<br>
+<br>
+<form action="{% url 'bookid' book_id %}" method="POST">
+    {% csrf_token %}
+    <button type="submit" name="delete">Delete this book</button>
+</form>
+<br>
+<br>
+<b>Update this book:</b>
+<form action="{% url 'bookid' book_id %}" method="POST">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit">
+</form>
+<br>
 
 {% elif book_name %}
 
@@ -17,11 +33,10 @@
 
 {% else %}
 
-<b>Add new books:</b>
+<b>Add new book:</b>
 <form action="{% url 'books' %}" method="POST">
     {% csrf_token %}
     {{ form.as_p }}
-    <!-- <button type="submit">Submit</button> -->
     <input type="submit">
 </form>
 <br>
@@ -29,7 +44,7 @@
     <b>All books in library ({{all_books | length}}):</b>
     <ul style="font-size:small">
         {% for book in all_books %}
-        <li>{{book.name}}</li>
+        <li><a href="{% url 'bookid' book.id %}">{{book.name}}</a></li>
         {% endfor %}
     </ul>
 

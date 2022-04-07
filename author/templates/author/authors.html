@@ -13,6 +13,14 @@
 
 {% else %}
 
+<b>Add new author:</b>
+<form action="{% url 'authors' %}" method="POST">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit">
+</form>
+<br>
+
 <b>All authors ({{all_authors | length}}):</b>
 <ul style="font-size:small">
     {% for author in all_authors %}

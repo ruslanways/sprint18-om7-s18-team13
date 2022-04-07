@@ -15,9 +15,12 @@ class Author(models.Model):
 
     """
 
-    name = models.CharField(blank=True, max_length=20)
-    surname = models.CharField(blank=True, max_length=20)
-    patronymic = models.CharField(blank=True, max_length=20)
+    name = models.CharField(max_length=20)
+    surname = models.CharField(max_length=20)
+    patronymic = models.CharField(max_length=20)
+
+    class Meta:
+        ordering = ['surname']
 
     def __str__(self):
         """
