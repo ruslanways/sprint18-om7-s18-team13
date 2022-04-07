@@ -18,7 +18,7 @@ class Book(models.Model):
         type authors: list->Author
     """
 
-    name = models.CharField(blank=True, max_length=128)
+    name = models.CharField(max_length=128)
     description = models.TextField(blank=True)
     count = models.IntegerField(default=10)
     authors = models.ManyToManyField(Author, related_name='books')
