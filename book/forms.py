@@ -13,5 +13,3 @@ class AddBook(forms.ModelForm):
         fields = '__all__'
 
     authors = AuthorsModelMultipleChoice(queryset=Author.objects.all())
-
-
