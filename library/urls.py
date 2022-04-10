@@ -17,6 +17,11 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import include, path
 from . import views
+from authentication.views import UserView
+from rest_framework.routers import SimpleRouter
+
+router = SimpleRouter()
+router.register('api/users', UserView)
 
 urlpatterns = [
     path('', views.index, name='main'),
@@ -24,5 +29,7 @@ urlpatterns = [
     path('books/', include('book.urls')),
     path('orders/', include('order.urls')),
     path('authors/', include('author.urls')),
-    path('users/', include('authentication.urls')),
+    path('users/', include('authentication.urls'))
 ]
+
+urlpatterns += router.urls

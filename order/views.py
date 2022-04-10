@@ -1,10 +1,22 @@
-from django.shortcuts import render
+from django.shortcuts import redirect, render
+from order.forms import AddOrder
 from . models import *
-# from django.db.models import F
+from rest_framework.viewsets import ModelViewSet
 
 def orders(request):
-    all_orders = list(Order.objects.all().order_by('created_at','plated_end_at'))
-    return render(request, 'order/orders.html', {'title': 'Library orders', 'all_orders': all_orders})
+
+    if request.method == 'POST':
+        form = AddOrder(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('orders')
+        else:
+            form = AddOrder()
+    else:
+        form = AddOrder()
+
+    all_orders = Order.objects.all().order_by('created_at','plated_end_at')
+    return render(request, 'order/orders.html', {'title': 'Library orders', 'all_orders': all_orders, 'form': form})
 
 def breakers(request):
     breakers = [f"{breaker.user.last_name} {breaker.user.first_name} {breaker.user.middle_name}"
