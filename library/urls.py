@@ -16,12 +16,14 @@ Including another URLconf
 
 from django.contrib import admin
 from django.urls import include, path
+from order.views import OrderView
 from . import views
 from authentication.views import UserView
 from rest_framework.routers import SimpleRouter
 
 router = SimpleRouter()
 router.register('api/users', UserView)
+router.register('api/orders', OrderView)
 
 urlpatterns = [
     path('', views.index, name='main'),

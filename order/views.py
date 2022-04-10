@@ -1,5 +1,6 @@
 from django.shortcuts import redirect, render
 from order.forms import AddOrder
+from order.serializers import OrderSerializer
 from . models import *
 from rest_framework.viewsets import ModelViewSet
 
@@ -31,3 +32,8 @@ def unordered(request):
     }
 
     return render(request, 'order/unordered.html', param)
+
+
+class OrderView(ModelViewSet):
+    queryset = Order.objects.all()
+    serializer_class = OrderSerializer
