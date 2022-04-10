@@ -18,12 +18,14 @@ from django.contrib import admin
 from django.urls import include, path
 from order.views import OrderView
 from . import views
-from authentication.views import UserView
+from authentication.views import UserOdersView, UserView
 from rest_framework.routers import SimpleRouter
 
 router = SimpleRouter()
 router.register('api/users', UserView)
+router.register('api/users/<int:pk>/orders', UserOdersView, basename="abracadabra")
 router.register('api/orders', OrderView)
+
 
 urlpatterns = [
     path('', views.index, name='main'),
