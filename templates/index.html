@@ -2,7 +2,14 @@
 
 {% block content %}
 
-<div>
+<div>Sprint 18 backlog api:
+    <ul style="font-size:small">
+        <li><a href="{% url 'customuser-list' %}">api/v1/user/{id}</a></li><br>
+        <li><a href="{% url 'user_order-list' 5 %}">api/v1/user/{id}/order/{id}</a></li><br>
+        <li><a href="{% url 'order-list' %}">api/v1/order/{id}</a></li><br>
+        <li><a href="{% url 'book-list' %}">api/v1/book/{id}</a></li><br>
+        <li><a href="{% url 'author-list' %}">api/v1/author/{id}</a></li><br>
+    </ul>
     Sprint 16 backlog
     "create the appropriate views and templates for":
     <ol style="font-size:small">
