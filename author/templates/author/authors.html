@@ -24,7 +24,7 @@
 <b>All authors ({{all_authors | length}}):</b>
 <ul style="font-size:small">
     {% for author in all_authors %}
-    <li>{{ author.surname }} {{ author.name }}</li>
+    <li><a href="{% url 'authors_int' author.id %}">{{ author.surname }} {{ author.name }}</a></li>
     {% endfor %}
 </ul>
 
