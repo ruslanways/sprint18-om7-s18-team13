@@ -1,6 +1,9 @@
 from django.shortcuts import redirect, render
-from book.forms import *
-from . models import *
+from book.forms import AddBook
+from .serializers import BookSerializer
+from .models import Book
+from rest_framework.viewsets import ModelViewSet
+from rest_framework import viewsets
 
 def books(request, book_id=None, book_name=None):
 
@@ -43,3 +46,8 @@ def books(request, book_id=None, book_name=None):
         param_with_book_id.update({'form': AddBook(instance=Book.objects.get(id=book_id))})
         return render(request, 'book/books.html', param_with_book_id)
     return render(request, 'book/books.html', param)
+
+
+class BookView(viewsets.ModelViewSet):
+    queryset = Book.objects.all()
+    serializer_class = BookSerializer
