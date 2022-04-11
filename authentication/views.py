@@ -42,8 +42,12 @@ class UserView(ModelViewSet):
     serializer_class = UserSerializer
 
 class UserOdersView(ReadOnlyModelViewSet):
-    queryset = Order.objects.filter(user_id=self.kwargs['pk'])
+
     serializer_class = UserOrderSerializer
-    
-    # def get_queryset(self):
-    #     return Order.objects.filter(user_id=self.kwargs['pk'])
+
+    def get_queryset(self):
+        pkuser = self.kwargs.get("pkuser")
+        pk = self.kwargs.get("pk")
+        if not pk:
+            return Order.objects.filter(user_id=pkuser)
+        return Order.objects.filter(pk=pk)

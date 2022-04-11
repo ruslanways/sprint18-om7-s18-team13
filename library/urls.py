@@ -23,12 +23,12 @@ from rest_framework.routers import SimpleRouter
 
 router = SimpleRouter()
 router.register('api/users', UserView)
-router.register(r'api/users/<int:pk>/orders', UserOdersView)
 router.register('api/orders', OrderView)
-
 
 urlpatterns = [
     path('api/v1/', include(router.urls)),
+    path('api/users/<int:pkuser>/orders/', UserOdersView.as_view({'get': 'list'})),
+    path('api/users/<int:pkuser>/orders/<int:pk>/', UserOdersView.as_view({'get': 'retrieve'})),
     path('', views.index, name='main'),
     path('admin/', admin.site.urls),
     path('books/', include('book.urls')),
