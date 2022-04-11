@@ -23,11 +23,12 @@ from rest_framework.routers import SimpleRouter
 
 router = SimpleRouter()
 router.register('api/users', UserView)
-router.register('api/users/<int:pk>/orders', UserOdersView, basename="abracadabra")
+router.register(r'api/users/<int:pk>/orders', UserOdersView)
 router.register('api/orders', OrderView)
 
 
 urlpatterns = [
+    path('api/v1/', include(router.urls)),
     path('', views.index, name='main'),
     path('admin/', admin.site.urls),
     path('books/', include('book.urls')),
@@ -35,5 +36,3 @@ urlpatterns = [
     path('authors/', include('author.urls')),
     path('users/', include('authentication.urls'))
 ]
-
-urlpatterns += router.urls

@@ -1,11 +1,12 @@
 from django.shortcuts import redirect, render
+import pkg_resources
 from authentication.forms import AddUser
 from authentication.serializers import UserOrderSerializer, UserSerializer
 from order.models import Order
 from . models import *
-from rest_framework.viewsets import ModelViewSet
-from rest_framework.views import APIView
+from rest_framework.viewsets import ModelViewSet, ReadOnlyModelViewSet
 from rest_framework.response import Response
+from rest_framework import generics
 
 
 def users(request, user_id=None):
@@ -40,7 +41,9 @@ class UserView(ModelViewSet):
     queryset = CustomUser.objects.all()
     serializer_class = UserSerializer
 
-class UserOdersView(ModelViewSet):
+class UserOdersView(ReadOnlyModelViewSet):
+    queryset = Order.objects.filter(user_id=self.kwargs['pk'])
     serializer_class = UserOrderSerializer
+    
     # def get_queryset(self):
-    #     return Order.objects.filter(user_id=pk)
+    #     return Order.objects.filter(user_id=self.kwargs['pk'])
