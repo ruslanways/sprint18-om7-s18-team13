@@ -1,10 +1,11 @@
 from django.shortcuts import render, redirect
-from author.forms import AddAuthor
-from book.models import Book
+from .forms import AddAuthor
+from .serializers import AuthorSerializer
 from .models import *
+from rest_framework import viewsets
+
 
 def authors(request, author_id=None):
-
     if request.method == 'POST':
         form = AddAuthor(request.POST)
         if form.is_valid():
@@ -18,7 +19,7 @@ def authors(request, author_id=None):
     param_with_author_id = {
         'title': 'Books by specific author',
         'author_id': author_id,
-        'authors_id': Book.objects.filter(authors__pk=author_id)
+        'authors_id': Author.get_by_id(author_id)
     }
     param = {
         'form': form,
@@ -26,4 +27,9 @@ def authors(request, author_id=None):
         'all_authors': Author.objects.all(),
     }
     return render(request, 'author/authors.html', param_with_author_id) if author_id else \
-    render(request, 'author/authors.html', param)
+        render(request, 'author/authors.html', param)
+
+
+class AuthorView(viewsets.ModelViewSet):
+    queryset = Author.objects.all()
+    serializer_class = AuthorSerializer
