@@ -2,6 +2,8 @@ from django.shortcuts import render, redirect
 from author.forms import AddAuthor
 from book.models import Book
 from .models import *
+from rest_framework.viewsets import ModelViewSet
+from author.serializers import AuthorSerializer
 
 def authors(request, author_id=None):
 
@@ -27,3 +29,8 @@ def authors(request, author_id=None):
     }
     return render(request, 'author/authors.html', param_with_author_id) if author_id else \
     render(request, 'author/authors.html', param)
+
+
+class AuthorView(ModelViewSet):
+    queryset = Author.objects.all()
+    serializer_class = AuthorSerializer

@@ -14,15 +14,30 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 
+from posixpath import basename
 from django.contrib import admin
 from django.urls import include, path
+from order.views import OrderView
 from . import views
+from authentication.views import UserOdersView, UserView
+from rest_framework.routers import SimpleRouter
+from author.views import AuthorView
+from book.views import BookView
+
+router = SimpleRouter()
+router.register('users', UserView)
+router.register('orders', OrderView)
+router.register('authors', AuthorView)
+router.register('books', BookView)
 
 urlpatterns = [
+    path('api/v1/', include(router.urls)),
+    path('api/v1/users/<int:pkuser>/orders/', UserOdersView.as_view({'get': 'list'}), name='user_order-list'),
+    path('api/v1/users/<int:pkuser>/orders/<int:pk>/', UserOdersView.as_view({'get': 'retrieve'})),
     path('', views.index, name='main'),
     path('admin/', admin.site.urls),
     path('books/', include('book.urls')),
     path('orders/', include('order.urls')),
     path('authors/', include('author.urls')),
-    path('users/', include('authentication.urls')),
+    path('users/', include('authentication.urls'))
 ]
