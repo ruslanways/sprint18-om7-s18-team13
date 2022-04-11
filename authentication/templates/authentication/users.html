@@ -14,6 +14,15 @@
 
 {% else %}
 
+<b>Add new user:</b>
+<form action="{% url 'users' %}" method="POST">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit">
+</form>
+<br>
+
+
 <b>All users ({{all_users|length}}):</b>
 <ul style="font-size:small">
     {% for user in all_users %}

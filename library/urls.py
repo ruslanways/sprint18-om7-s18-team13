@@ -16,13 +16,23 @@ Including another URLconf
 
 from django.contrib import admin
 from django.urls import include, path
+from order.views import OrderView
 from . import views
+from authentication.views import UserOdersView, UserView
+from rest_framework.routers import SimpleRouter
+
+router = SimpleRouter()
+router.register('users', UserView)
+router.register('orders', OrderView)
 
 urlpatterns = [
+    path('api/v1/', include(router.urls)),
+    path('api/v1/users/<int:pkuser>/orders/', UserOdersView.as_view({'get': 'list'})),
+    path('api/v1/users/<int:pkuser>/orders/<int:pk>/', UserOdersView.as_view({'get': 'retrieve'})),
     path('', views.index, name='main'),
     path('admin/', admin.site.urls),
     path('books/', include('book.urls')),
     path('orders/', include('order.urls')),
     path('authors/', include('author.urls')),
-    path('users/', include('authentication.urls')),
+    path('users/', include('authentication.urls'))
 ]

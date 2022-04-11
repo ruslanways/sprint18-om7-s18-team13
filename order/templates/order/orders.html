@@ -2,12 +2,22 @@
 
 {% block content %}
 
+
+<b>Add new order:</b>
+<form action="{% url 'orders' %}" method="POST">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit">
+</form>
+<br>
+
 <b>All orders ({{all_orders | length}}) sorted by date (created at, plated at):</b>
 <ul style="font-size:small">
     {% for order in all_orders %}
-    <li>{{ order }}</li>
+    <li>({{order.id}}) {{order.user.last_name}} {{order.user.first_name}}: {{order.book.name}}, created on {{order.created_at | date:"d.m.Y"}}, deadline on {{order.plated_end_at | date:"d.m.Y"}}, returned on {{order.end_at | date:"d.m.Y"}}</li>
     <br>
     {% endfor %}
 </ul>
 
 {% endblock %}
+
